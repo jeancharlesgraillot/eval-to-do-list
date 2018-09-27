@@ -2,7 +2,7 @@
 
 try
 {
-  $bdd = new PDO('mysql:host=localhost;dbname=;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  $db = new PDO('mysql:host=localhost;dbname=to_do_list_eval;charset=utf8', 'root', 'Strawberry591peaches', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch(Exception $e)
 {

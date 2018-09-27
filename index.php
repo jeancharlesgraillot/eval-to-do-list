@@ -25,23 +25,52 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
-<?php require('header.php'); ?>
+<?php
 
-  <script src="js/vendor/modernizr-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
-  <script src="js/bootstrap.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+require('header.php');
 
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+require('db_access.php');
+
+// Request on database to get elements we choose
+$response = $db->query('SELECT name FROM projects ORDER BY deadline LIMIT 0, 4');
+?>
+
+<main>
+
+  <div class="projectAdd mx-auto">
+    <a href="projectAdd.php">
+      <button type="button" class="btn btn-primary my-3">Ajouter un projet</button>
+    </a>
+  </div>
+
+  <h2 class="text-center h4 mt-4">Liste des projets :</h2>
+
+  <div class="row col-12 mx-auto d-flex justify-content-around">
+
+<?php
+while ($data = $response->fetch()){
+?>
+
+    <div class="projectCard mt-3 border border-dark col-12 col-md-6 col-lg-3">
+      <a href="projectDetails.php?index=<?php echo $data['name']; ?>">
+        <p class="projectName text-center pt-2 blackText"><?php echo $data['name']; ?></p>
+      </a>
+    </div>
+
+
+<?php
+}
+$response->closeCursor();
+?>
+
+
+  </div>
+
+
+</main>
+
+<?php require('scripts.php') ?>
+
 </body>
 
 </html>
