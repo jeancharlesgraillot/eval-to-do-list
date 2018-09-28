@@ -17,7 +17,7 @@ AND isset($deadline) AND !empty($deadline)) {
       'deadline' => $deadline,
       ));
 
-  echo "Votre projet a bien été enregistré";
+  echo "Votre projet a bien été enregistré !";
   header('refresh:1;url=index.php');
 
 }else{
