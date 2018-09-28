@@ -32,7 +32,7 @@ require('header.php');
 require('db_access.php');
 
 // Request on database to get elements we choose
-$response = $db->query('SELECT name FROM projects ORDER BY deadline LIMIT 0, 4');
+$response = $db->query('SELECT name, id, deadline FROM projects ORDER BY deadline LIMIT 0, 8');
 ?>
 
 <main>
@@ -50,12 +50,20 @@ $response = $db->query('SELECT name FROM projects ORDER BY deadline LIMIT 0, 4')
 <?php
 while ($data = $response->fetch()){
 ?>
-
-    <div class="projectCard mt-3 border border-dark col-12 col-md-6 col-lg-3">
-      <a href="projectDetails.php?index=<?php echo $data['name']; ?>">
-        <p class="projectName text-center pt-2 blackText"><?php echo $data['name']; ?></p>
+  <div class="projectWrap col-12 col-md-6 col-lg-3">
+    <div class="projectCard mt-3 border border-dark">
+      <a href="projectDetails.php?index=<?php echo $data['id']; ?>">
+        <p class="projectName text-center pt-2 blackText font-weight-bold"><?php echo 'Projet : ' . $data['name']; ?></p>
+        <p class="projectDeadline text-center pt-2 blackText"><?php echo 'Date limite : ' . $data['deadline']; ?></p>
       </a>
     </div>
+    <div class="projectDel text-center">
+      <a href="projectDelete.php?index=<?php echo $data['id']; ?>">
+        <button type="button" class="btn btn-primary my-3">Supprimer</button>
+      </a>
+    </div>
+  </div>
+
 
 
 <?php
@@ -63,9 +71,7 @@ while ($data = $response->fetch()){
 $response->closeCursor();
 ?>
 
-
   </div>
-
 
 </main>
 
