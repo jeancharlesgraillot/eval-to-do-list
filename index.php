@@ -26,7 +26,8 @@ $response = $db->query('SELECT name, id, deadline FROM projects ORDER BY deadlin
 ?>
 
 <main>
-
+  
+<!-- Add a project -->
   <div class="projectAdd mx-auto">
     <a href="projectAdd.php">
       <button type="button" class="btn btn-primary my-3">Ajouter un projet</button>
@@ -43,8 +44,8 @@ while ($data = $response->fetch()){
   <div class="projectWrap col-12 col-md-6 col-lg-3">
     <div class="projectCard mt-3 border border-dark">
       <a href="projectDetails.php?index=<?php echo $data['id']; ?>">
-        <p class="projectName text-center pt-2 blackText font-weight-bold"><?php echo 'Projet : ' . $data['name']; ?></p>
-        <p class="projectDeadline text-center pt-2 blackText"><?php echo 'Date limite : ' . $data['deadline']; ?></p>
+        <p class="my-0 projectName text-center pt-2 blackText font-weight-bold"><?php echo 'Projet : ' . $data['name']; ?></p>
+        <p class="my-0 projectDeadline text-center pt-2 blackText"><?php echo 'Date limite : ' . $data['deadline']; ?></p>
       </a>
     </div>
     <div class="projectDel text-center">

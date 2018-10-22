@@ -17,7 +17,7 @@
 
 <?php
 
-$index = ($_GET['index']);
+$index = $_GET['index'];
 
 require('header.php');
 
@@ -25,7 +25,7 @@ require('db_access.php');
 
 // Request on database to get elements we choose
 
-$req = $db->prepare('SELECT id, name, description, deadline FROM projects WHERE id= :id');
+$req = $db->prepare('SELECT * FROM projects WHERE id= :id');
 $req->execute(array('id' => $index));
 
 $data = $req->fetch();
@@ -50,9 +50,9 @@ $data = $req->fetch();
   </div>
 
 <?php
+  $index = $_GET['index'];
 
-
-  $req = $db->query('SELECT * FROM lists WHERE id_project = '. $index .'');
+  $req = $db->query('SELECT * FROM lists WHERE id_project = ' . $index . '');
 ?>
 
   <div class="row col-12 mx-auto d-flex justify-content-around">
@@ -62,14 +62,13 @@ while ($data = $req->fetch()){
 ?>
     <div class="listWrap col-12 col-md-6 col-lg-3">
       <div class="listCard mt-3 border border-dark">
-        <a href="listDetails.php?index=<?php echo $index; ?>">
+        <a href="listDetails.php?index=<?php echo $data['projects_id']; ?>">
           <p class="my-0 listName text-center pt-2 blackText font-weight-bold"><?php echo 'Liste : ' . $data['name']; ?></p>
 
         </a>
       </div>
       <div class="listDel text-center">
-        <a href="listDelete.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>">
-          <!-- <a href="bonjour.php?nom=Dupont&amp;prenom=Jean&amp;repeter=3;"> -->
+        <a href="listDelete.php?index=<?php echo $data['projects_id']; ?>">
           <button type="button" class="btn btn-primary my-3">Supprimer</button>
         </a>
       </div>
