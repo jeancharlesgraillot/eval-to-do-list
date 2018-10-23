@@ -62,14 +62,13 @@ while ($data = $req->fetch()){
 ?>
     <div class="listWrap col-12 col-md-6 col-lg-3">
       <div class="listCard mt-3 border border-dark">
-        <a href="listDetails.php?index=<?php echo $index; ?>">
+        <a href="listDetails.php?index=<?php echo $data['id']; ?>">
           <p class="my-0 listName text-center pt-2 blackText font-weight-bold"><?php echo 'Liste : ' . $data['name']; ?></p>
 
         </a>
       </div>
       <div class="listDel text-center">
         <a href="listDelete.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>">
-          <!-- <a href="bonjour.php?nom=Dupont&amp;prenom=Jean&amp;repeter=3;"> -->
           <button type="button" class="btn btn-primary my-3">Supprimer</button>
         </a>
       </div>
