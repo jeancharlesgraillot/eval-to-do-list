@@ -53,31 +53,35 @@ $data = $req->fetch();
 
 ?>
 
-  <!-- <div class="flexBoxDeux my-5 col-12 d-md-flex justify-content-md-between"> -->
-
 <?php
 
 while ($data = $req->fetch()){
 
 ?>
-  <div class="taskWrap col-12 d-md-flex justify-content-md-between my-3">
+  <!-- <div class="taskWrap col-12 d-md-flex justify-content-md-between my-3"> -->
+    <form class="taskWrap col-12 d-md-flex justify-content-md-between mb-3" action="taskUpdateCheck.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>" method="post">
 
-    <div class="taskAndCheck col-12 col-md-5 text-center text-md-left my-auto pt-2">
-      <input type="checkbox" />
-      <label><?php echo 'Tâche : ' . $data['name'] ?></label><br />
-    </div>
+      <div class="taskAndCheck col-12 col-md-4 text-center text-md-left my-auto pt-2">
+        <input type="checkbox" name="checkedornot" />
+        <label><?php echo 'Tâche : ' . $data['name'] ?></label><br />
+      </div>
 
-    <div class="taskDeadline col-12 col-md-5 text-center text-md-left my-auto">
-      <p class="mb-0"><?php echo 'Date limite : ' . $data['deadline'] ?></p>
-    </div>
+      <div class="taskDeadline col-12 col-md-4 text-center text-md-left my-auto">
+        <p class="mb-0"><?php echo 'Date limite : ' . $data['deadline'] ?></p>
+      </div>
 
-    <div class="taskDelete col-12 col-md-2 text-md-right text-center ml-lg-auto">
-      <a href="taskDelete.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>">
-        <button type="button" class="btn btn-primary my-3">Supprimer</button>
-      </a>
-    </div>
+      <div class="taskDelete col-12 col-md-2 text-md-right text-center ml-lg-auto">
+        <a href="taskDelete.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>">
+          <button type="button" class="btn btn-primary my-2">Supprimer</button>
+        </a>
+      </div>
+      <div class="taskUpdate col-12 col-md-2 text-md-right text-center ml-lg-auto">
+        <input class="btn btn-primary my-2" type="submit" value="Update" />
+      </div>
 
-  </div>
+    </form>
+  <!-- </div> -->
+
 
 <?php
 }
@@ -85,7 +89,7 @@ $req->closeCursor();
 
 ?>
 
-  </div>
+
 
 </main>
 

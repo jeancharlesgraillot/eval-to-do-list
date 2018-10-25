@@ -64,8 +64,8 @@ while ($data = $req->fetch()){
       <div class="listCard mt-3 border border-dark">
         <a href="listDetails.php?index=<?php echo $data['id']; ?>">
           <p class="my-0 listName text-center pt-2 blackText font-weight-bold"><?php echo 'Liste : ' . $data['name']; ?></p>
-
         </a>
+        <!-- <p>Tâches restant à faire</p> -->
       </div>
       <div class="listDel text-center">
         <a href="listDelete.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>">
