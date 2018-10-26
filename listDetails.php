@@ -35,11 +35,18 @@ $data = $req->fetch();
 <main>
   <div class="flexBox col-12 d-md-flex justify-content-md-between mb-5">
 
-    <div class="listDetailsWrapper col-12 col-md-5 text-center text-md-left">
+    <div class="listDetailsWrapper col-12 col-md-6 text-center text-md-left">
       <h2 class="my-3"><?php echo 'Liste : ' . $data['name'] ?></h2>
     </div>
 
-    <div class="taskAdd col-12 col-md-5 text-md-right text-center ml-lg-auto">
+    <div class="backToLists col-12 col-md-3 text-center">
+      <a href="projectDetails.php?index=<?php echo $data['id_project']; ?>">
+        <button type="button" class="btn btn-primary my-3">Retour aux listes</button>
+      </a>
+    </div>
+
+
+    <div class="taskAdd col-12 col-md-3 text-md-right text-center ml-lg-auto">
       <a href="taskAdd.php?index=<?php echo $data['id']; ?>">
         <button type="button" class="btn btn-primary my-3">Ajouter une tâche</button>
       </a>

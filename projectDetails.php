@@ -71,9 +71,10 @@ $data = $req->fetch();
               </a>
 
               <?php
-              $reqtask = $db->prepare('SELECT * FROM tasks WHERE id_list = :takeidlist');
+              $reqtask = $db->prepare('SELECT * FROM tasks WHERE id_list = :takeidlist AND done = :todotask');
               $reqtask->execute(array(
-                'takeidlist' => $value['id']
+                'takeidlist' => $value['id'],
+                'todotask' => 0
               ));
               $reqtask = $reqtask->fetchAll();
               foreach ($reqtask as $key => $value){
