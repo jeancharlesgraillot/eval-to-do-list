@@ -49,53 +49,47 @@ $data = $req->fetch();
 
   </div>
 
-  <?php
-  $req = $db->prepare('SELECT * FROM lists WHERE id_project = :id_project');
-  $req->execute(array(
-    'id_project' => $index,
-  ));
-  $data = $req->fetchAll();
+<?php
+  // $req = $db->query('SELECT * FROM lists WHERE id_project = '. $index .'');
 
-  ?>
+  $req = $db->query('SELECT l.id list_id, l.name list_name, l.id_project list_id_project, t.name task_name, t.done task_done, t.id_list task_id_list
+  FROM lists l
+  RIGHT JOIN tasks t
+  ON t.id_list = l.id
+  WHERE l.id_project = '. $index .'
+  ORDER BY list_id ASC
+  ');
+
+?>
 
   <div class="row col-12 mx-auto d-flex justify-content-around">
-      <?php
-      foreach ($data as $key => $value) {
-      $listname = $value['name'];
-      ?>
 
-          <div class="listWrap col-12 col-md-6 col-lg-3">
-            <div class="listCard mt-3 border border-dark">
-              <a href="listDetails.php?index=<?php echo $value['id']; ?>">
-                <p class="border-bottom border-dark my-0 listName text-center py-3 blackText font-weight-bold"><?php echo 'Liste : ' . $value['name']; ?></p>
-              </a>
+<?php
 
-              <?php
-              $reqtask = $db->prepare('SELECT * FROM tasks WHERE id_list = :takeidlist');
-              $reqtask->execute(array(
-                'takeidlist' => $value['id']
-              ));
-              $reqtask = $reqtask->fetchAll();
-              foreach ($reqtask as $key => $value){
-              ?>
+while ($data = $req->fetch()){
+?>
+    <div class="listWrap col-12 col-md-6 col-lg-3">
+      <div class="listCard mt-3 border border-dark">
+        <a href="listDetails.php?index=<?php echo $data['list_id']; ?>">
+          <p class="my-0 listName text-center pt-2 blackText font-weight-bold"><?php echo 'Liste : ' . $data['list_name']; ?></p>
+        </a>
 
-              <p class="text-center my-3"><?php echo $value['name']; ?></p>
+        <p class="text-center"><?php echo $data['task_name']; ?></p>
 
-              <?php
-              }
-              ?>
+      </div>
+      <div class="listDel text-center">
+        <a href="listDelete.php?index=<?php echo $index ?>&name=<?php echo $data['list_name']?>">
+          <button type="button" class="btn btn-primary my-3">Supprimer</button>
+        </a>
+      </div>
+    </div>
 
-              </div>
-              <div class="listDel text-center">
-                <a href="listDelete.php?index=<?php echo $index ?>&name=<?php echo $listname ?>">
-                  <button type="button" class="btn btn-primary my-3">Supprimer</button>
-                </a>
-              </div>
-            </div>
-      <?php
-      }
-      ?>
+  <?php
+  }
+  $req->closeCursor();
+  ?>
 
+  </div>
 </main>
 
 <?php require('scripts.php') ?>

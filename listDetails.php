@@ -58,7 +58,7 @@ $data = $req->fetch();
 while ($data = $req->fetch()){
 
 ?>
-  <!-- <div class="taskWrap col-12 d-md-flex justify-content-md-between my-3"> -->
+
     <form class="taskWrap col-12 d-md-flex justify-content-md-between mb-3" action="taskUpdateCheck.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>" method="post">
 
       <div class="taskAndCheck col-12 col-md-4 text-center text-md-left my-auto pt-2">
@@ -80,7 +80,7 @@ while ($data = $req->fetch()){
       </div>
 
     </form>
-  <!-- </div> -->
+
 
 
 <?php
