@@ -7,7 +7,7 @@ require('db_access.php');
 
 if (isset($name) AND !empty($name) AND isset($index) AND !empty($index)) {
 
-  // Insertion of project informations in database
+  // Insertion of list informations in database
   $req = $db->prepare('INSERT INTO lists (name, id_project) VALUES(:name, :id_project)');
   $req->execute(array(
       'name' => $name,

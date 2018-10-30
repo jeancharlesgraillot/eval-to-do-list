@@ -6,6 +6,7 @@ $deadline = htmlspecialchars($_POST['deadline']);
 
 require('db_access.php');
 
+// Check if form entries are set and not empty
 if (isset($name) AND !empty($name) AND isset($description) AND !empty($description)
 AND isset($deadline) AND !empty($deadline)) {
 
@@ -18,25 +19,12 @@ AND isset($deadline) AND !empty($deadline)) {
       ));
 
   echo "Votre projet a bien été enregistré !";
+  // Redirection on wanted page
   header('refresh:1;url=index.php');
 
 }else{
   echo "Erreur !";
   header('refresh:1;url=projectAdd.php');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

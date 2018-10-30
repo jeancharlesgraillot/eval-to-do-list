@@ -1,16 +1,12 @@
 <?php
-  // if ($data['done'] == 1) {
-  //
-  // }
+
   $index = ($_GET['index']);
   $name = ($_GET['name']);
   $checkedornot = 0; // unchecked by default
 
   require('db_access.php');
 
-// $req = $db->query('SELECT done FROM tasks WHERE id_list = '. $index .'');
-
-// while ($data = $req->fetch()){
+  // A condition who update tasks table in database in function of the fact that checkbox is checked or not in list details page
 
   if (!empty($_POST['checkedornot'])) {
 
@@ -36,8 +32,6 @@
 
   }
 
-// }
-// $req->closeCursor();
 
 echo "L'exécution de la tâche a été mise à jour !";
 header('refresh:1;url=listDetails.php?index=' . $index);

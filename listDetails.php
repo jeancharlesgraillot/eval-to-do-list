@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="fr">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title></title>
+  <title>Projects Sheduler / List Details</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <?php require("links.php");?>
@@ -23,7 +23,7 @@ require('header.php');
 
 require('db_access.php');
 
-// Request on database to get elements we choose
+// Request on database to get list elements
 
 $req = $db->prepare('SELECT id, name, id_project FROM lists WHERE id= :id');
 $req->execute(array('id' => $index));
@@ -53,22 +53,23 @@ $data = $req->fetch();
     </div>
 
   </div>
-
+<!-- Request on database to get tasks elements linked to the list -->
 <?php
 
   $req = $db->query('SELECT * FROM tasks WHERE id_list = '. $index .'');
 
 ?>
-
+<!-- Display all tasks and details linked to the list with possibility to update a task if it's done or delete it -->
 <?php
 
 while ($data = $req->fetch()){
 
 ?>
-
+    <!-- to update database for indicate if a task is done or not, a form who send in url id and name of task -->
     <form class="taskWrap col-12 d-md-flex justify-content-md-between mb-3" action="taskUpdateCheck.php?index=<?php echo $index ?>&name=<?php echo $data['name']?>" method="post">
 
       <div class="taskAndCheck col-12 col-md-4 text-center text-md-left my-auto pt-2">
+        <!-- A condition to display a checked box or not in function of boolean in database after update -->
         <?php
         if ($data['done'] == 1){
           echo '<input type="checkbox" name="checkedornot" checked />';
